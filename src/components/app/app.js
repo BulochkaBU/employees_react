@@ -11,23 +11,41 @@ class App extends Component{
     constructor(props){
         super(props); 
         this.state = {
-            data: [
+            dataEmployees: [
                 {name: "John G.", salary: 1800, increase: true, id: 1},
                 {name: "Mike D.", salary: 3000, increase: false, id: 2},
                 {name: "Jane X.", salary: 5500, increase: false, id: 3},
             ]
         }
+        this.maxId = 4;
+
     }
 
     deleteItem = (id) => {
-        this.setState( ({data}) => {
+        this.setState( ({dataEmployees}) => {
             return {
-                data: data.filter(item => id !== item.id)
+                dataEmployees: dataEmployees.filter(item => id !== item.id)
             }
-
         })
     }
 
+    addEmployee = (name, salary) => {
+        const newEmployee = {
+            name,
+            salary,
+            increase: false,
+            id: this.maxId ++
+        }
+
+        this.setState(({dataEmployees}) => {
+            return {
+                dataEmployees: [...dataEmployees, newEmployee]
+            }
+        });
+
+    }
+
+    
 
     render() {
         return (
@@ -38,9 +56,9 @@ class App extends Component{
                     <AppFilter/>
                 </div>
     
-                <EmployeesList data={this.state.data} onDelete={this.deleteItem} />
+                <EmployeesList data={this.state.dataEmployees} onDelete={this.deleteItem} onShowId={a => console.log(a)}/>
     
-                <EmployeesAddForm/>
+                <EmployeesAddForm onPushNewEmpoyee={this.addEmployee}/>
             </div>
         );
     }
