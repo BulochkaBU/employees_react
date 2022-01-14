@@ -16,11 +16,10 @@ class App extends Component{
                 {name: "Mike D.", salary: 3000, increase: false, like: false, id: 2},
                 {name: "Jane X.", salary: 5500, increase: false, like: false, id: 3},
             ],
-            searchText: ''
+            searchText: '',
+            filterName: ''
         }
         this.maxId = 4;
-
-
     }
 
     deleteItem = (id) => {
@@ -84,17 +83,29 @@ class App extends Component{
 
     }
 
+    filterEmp = (items, filter) => {
+        switch (filter) {
+            case 'like':  return items.filter(item => item.like);
+            case 'salary':  return items.filter(item => item.salary < 3000);
+            default: return items
+        }                      
+    }
+
+    onUpdateFilter = (filter) => {
+        this.setState({filterName: filter})
+    }
+
     render() {
-        const {dataEmployees, searchText} = this.state;
+        const {dataEmployees, searchText, filterName} = this.state;
         const allEmployees = this.state.dataEmployees.length;
         const increased = this.state.dataEmployees.filter(item => item.increase).length;
-        const visibleData = this.searchEmployee(dataEmployees, searchText)
+        const visibleData = this.filterEmp(this.searchEmployee(dataEmployees, searchText), filterName);
         return (
             <div className="app">
                 <AppInfo allEmployees={allEmployees} increased={increased}/>
                 <div className="search-panel">
                     <SearchPanel onSea={this.onUpdateSearch}/>
-                    <AppFilter/>
+                    <AppFilter onFilter={this.onUpdateFilter} filterName={filterName}/>
                 </div>
     
                 <EmployeesList data={visibleData}
@@ -107,9 +118,6 @@ class App extends Component{
             </div>
         );
     }
-
-
-
 }
 
 export default App;
