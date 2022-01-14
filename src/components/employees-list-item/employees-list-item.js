@@ -14,7 +14,7 @@ class EmployeesListItem extends Component {
         this.setState({
             currentSalary: newSalary
         })
-        this.props.changeSalary(newSalary)
+        this.props.changeSalary(this.props.name, newSalary)
     }
         
     render(){

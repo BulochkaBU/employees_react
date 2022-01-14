@@ -95,10 +95,13 @@ class App extends Component{
         this.setState({filterName: filter})
     }
 
-    changeSalary = (salary) => {
+    changeSalary = (name, salary) => {
         this.setState(({dataEmployees}) => ({
             dataEmployees: dataEmployees.map(item => {
-                return {...item, salary}
+                if (item.name === name) {
+                    return {...item, salary}
+                }
+                return item;
             })
         }))
     }
