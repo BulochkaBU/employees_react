@@ -1,7 +1,24 @@
+import { Component } from 'react';
 import './employees-list-item.css';
 
-const EmployeesListItem = (props) => {
-        const {name, salary, onDelete2, onToggleProp, increase, like} = props;
+class EmployeesListItem extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            currentSalary: ''
+        }
+    }
+
+    onChangeSalary = (e) => {
+        const newSalary = e.target.value.slice(0, -1)
+        this.setState({
+            currentSalary: newSalary
+        })
+        this.props.changeSalary(newSalary)
+    }
+        
+    render(){
+        const {name, salary, onDelete2, onToggleProp, increase, like} = this.props;
 
         let classNames = "list-group-item d-flex justify-content-between";
         if (increase){
@@ -11,11 +28,10 @@ const EmployeesListItem = (props) => {
         if (like){
             classNames += " like"
         }
-
         return (
             <li className={classNames}>
                 <span className="list-group-item-label" onClick={onToggleProp} data-toggle='like'>{name}</span>
-                <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
+                <input type="text" className="list-group-item-input" defaultValue={salary + '$'} onChange={this.onChangeSalary}/>
                 <div className='d-flex justify-content-center align-items-center'>
                     <button type="button"
                         className="btn-cookie btn-sm "
@@ -33,6 +49,8 @@ const EmployeesListItem = (props) => {
                 </div>
             </li>
         );
+    }
+        
 }
 
 export default EmployeesListItem;
