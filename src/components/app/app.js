@@ -17,7 +17,7 @@ class App extends Component{
                 {name: "Jane X.", salary: 5500, increase: false, like: false, id: 3},
             ],
             searchText: '',
-            filterName: ''
+            filterName: 'all'
         }
         this.maxId = 4;
     }
@@ -86,7 +86,7 @@ class App extends Component{
     filterEmp = (items, filter) => {
         switch (filter) {
             case 'like':  return items.filter(item => item.like);
-            case 'salary':  return items.filter(item => item.salary < 3000);
+            case 'salaryless3000':  return items.filter(item => item.salary < 3000);
             default: return items
         }                      
     }
