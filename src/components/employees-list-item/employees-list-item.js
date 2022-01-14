@@ -1,7 +1,7 @@
 import './employees-list-item.css';
 
 const EmployeesListItem = (props) => {
-        const {name, salary, onDelete, onToggleProp, increase, like} = props;
+        const {name, salary, onDelete2, onToggleProp, increase, like} = props;
 
         let classNames = "list-group-item d-flex justify-content-between";
         if (increase){
@@ -26,7 +26,7 @@ const EmployeesListItem = (props) => {
     
                     <button type="button"
                             className="btn-trash btn-sm "
-                            onClick={onDelete}>
+                            onClick={onDelete2}>
                         <i className="fas fa-trash"></i>
                     </button>
                     <i className="fas fa-star"></i>

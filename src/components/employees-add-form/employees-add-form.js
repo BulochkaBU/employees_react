@@ -5,8 +5,8 @@ class EmployeesAddForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
-            salary: ""
+            names: "",
+            salarys: ""
         }
     }
 
@@ -16,36 +16,37 @@ class EmployeesAddForm extends Component {
         })
     }
 
-    onPushNewEmpoyee = (e) => {
+    onNewEmpoyee = (e) => {
         e.preventDefault();
-        this.props.onPushNewEmpoyee(this.state.name, this.state.salary);
-        this.setState({
-            name: '',
-            salary: ''
-        })
-    }
-
-       
+        if (this.state.names.length > 2 && this.state.salarys !== '' && this.state.salarys > 0){
+            this.props.onPushNewEmpoyee(this.state.names, this.state.salarys);
+            this.setState({
+                names: '',
+                salarys: ''
+            })
+        } 
+    }     
 
 
     render() {
-        const {name, salary} = this.state;
+        const {names, salarys} = this.state;
+
         return (
             <div className="app-add-form">
                 <h3>Добавьте нового сотрудника</h3>
                 <form
                     className="add-form d-flex"
-                    onSubmit={this.onPushNewEmpoyee}>                    
+                    onSubmit={this.onNewEmpoyee}>                    
                     <input type="text"
                         className="form-control new-post-label"
-                        name="name"
-                        value={name}
+                        name="names"
+                        value={names}
                         onChange={this.onAddNewEmpoyee}
                         placeholder="Как его зовут?" />
                     <input type="number"
                         className="form-control new-post-label"
-                        name="salary"
-                        value={salary}
+                        name="salarys"
+                        value={salarys}
                         onChange={this.onAddNewEmpoyee}
                         placeholder="З/П в $?" />
     

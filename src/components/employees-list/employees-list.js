@@ -9,7 +9,7 @@ const EmployeesList = ({data, onDelete, onShowId, onToggleProp}) => {
         return (
         //<EmployeesListItem name={item.name} salary={item.salary} increase={item.increase} />
         <EmployeesListItem key={id} {...itemProps}
-                           onDelete={() => onDelete(id)}
+                           onDelete2={() => onDelete(id)}
                            onShowIdItem={() => onShowId(id)}
                            onToggleProp={(e) => onToggleProp(id, e.currentTarget.getAttribute('data-toggle'))}
                            />
